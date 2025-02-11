@@ -9,7 +9,7 @@ The app can be built using [FBT](https://github.com/flipperdevices/flipperzero-f
 
 1. Clone this repo and the Flipper [firmware](https://github.com/flipperdevices/flipperzero-firmware/) repo.
 2. Copy this repo and all of its contents into the `/applications_user/` directory of the firmware source.
-3. Navigate to the root of the firmware source and run `.fbt fap_pet_your_dolphin`.
+3. Navigate to the root of the firmware source and run `./fbt fap_pet_your_dolphin`.
 4. The build output can be found in the `build/f7-firmware-D/.extapps/` directory of the firmware source and uploaded to your Flipper as described in the previous section.
 
 You might be able to build the app with [uFBT](https://github.com/flipperdevices/flipperzero-ufbt) as well. Idk, I haven't checked.
