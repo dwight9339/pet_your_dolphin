@@ -1,5 +1,5 @@
 # Pet Your Dolphin
-The **Pet Your Dolphin** app for the Flipper Zero let's you check in your dolphin buddy daily and give them some well-deserved pets. Petting your dolphin improves its mood and provides some XP but these effects are capped by the firmware so you're limited to two pets a day.
+The **Pet Your Dolphin** app for the Flipper Zero let's you check in on your dolphin buddy daily and give them some well-deserved pets. Petting your dolphin improves its mood and provides some XP but these effects are capped by the firmware so you're limited to two pets a day.
 
 ## Installing the App
 You can install the app on your Flipper by simply downloading the latest [release](https://github.com/dwight9339/pet_your_dolphin/releases) and loading the `pet_your_dolphin.fap` file onto your Flipper's SD card using [qFlipper](https://flipperzero.one/update) or the [Flipper Labs](https://lab.flipper.net/) browser utility.
