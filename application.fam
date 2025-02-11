@@ -1,6 +1,9 @@
 App(
     appid="pet_your_dolphin",
+    fap_version="1.0",
+    fap_author="David White",
     name="Pet Your Dolphin",
+    fap_description="Pet your dolphin to keep it happy and earn XP",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="pet_your_dolphin",
     cdefines=["APP_PET_YOUR_DOLPHIN"],
@@ -8,5 +11,5 @@ App(
     stack_size=1 * 1024,
     order=30,
     fap_icon="fap_icon.png",
-    fap_category="Tools",
+    fap_category="Tools"
 )
