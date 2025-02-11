@@ -49,6 +49,6 @@ jobs:
             GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
             upload_url: "${{ steps.create_release.outputs.upload_url }}"
-            asset_path: "build/f7-firmware-D/.extapps/pet_your_dolphin.fap"
+            asset_path: "flipperzero-firmware/build/f7-firmware-D/.extapps/pet_your_dolphin.fap"
             asset_name: "pet_your_dolphin.fap"
             asset_content_type: "application/octet-stream"
