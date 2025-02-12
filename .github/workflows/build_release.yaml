@@ -1,36 +1,30 @@
-name: Build and Release FAP
-
-on:
-  push:
-    tags:
-      - "v*"
-  workflow_dispatch:
-
-permissions:
-  contents: "write"
-
+name: "FAP: Build and lint"
+on: [workflow_dispatch]
 jobs:
-  build_fap:
+  ufbt-build-action:
     runs-on: ubuntu-latest
+    name: 'ufbt: Build'
     steps:
-      - name: Check out project repo
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with ufbt
+        uses: flipperdevices/flipperzero-ufbt-action@v0.1
+        id: build-app
         with:
-          path: "pet-your-dolphin"
-
-      - name: Clone Flipper Zero Firmware
-        run: |
-          git clone https://github.com/flipperdevices/flipperzero-firmware.git
-          cd flipperzero-firmware
-
-      - name: Copy app into applications_user
-        run: |
-          cp -r pet-your-dolphin flipperzero-firmware/applications_user/
-
-      - name: Build .fap
-        working-directory: flipperzero-firmware
-        run: |
-          ./fbt fap_pet_your_dolphin
+          # Set to 'release' to build for latest published release version
+          sdk-channel: release
+      - name: Upload app artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }}-${{ steps.build-app.outputs.suffix }}
+          path: ${{ steps.build-app.outputs.fap-artifacts }}
+      # You can remove this step if you don't want to check source code formatting
+      - name: Lint sources
+        uses: flipperdevices/flipperzero-ufbt-action@v0.1
+        with:
+          # skip SDK setup, we already did it in previous step
+          skip-setup: true
+          task: lint
 
       - name: Create GitHub Release
         id: create_release
