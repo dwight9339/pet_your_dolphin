@@ -1,5 +1,8 @@
 name: "FAP: Build and lint"
 on: [workflow_dispatch]
+permissions:
+  contents: "write"
+
 jobs:
   ufbt-build-action:
     runs-on: ubuntu-latest
