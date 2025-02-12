@@ -14,7 +14,7 @@ jobs:
           # Set to 'release' to build for latest published release version
           sdk-channel: release
       - name: Upload app artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.repository.name }}-${{ steps.build-app.outputs.suffix }}
           path: ${{ steps.build-app.outputs.fap-artifacts }}
@@ -43,6 +43,6 @@ jobs:
             GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
             upload_url: "${{ steps.create_release.outputs.upload_url }}"
-            asset_path: "flipperzero-firmware/build/f7-firmware-D/.extapps/pet_your_dolphin.fap"
+            asset_path: ${{ steps.build-app.outputs.fap-artifacts }}
             asset_name: "pet_your_dolphin.fap"
             asset_content_type: "application/octet-stream"
