@@ -135,6 +135,7 @@ static void input_callback(InputEvent* input, void* ctx) {
     AppData* app = (AppData*)ctx;
     // Only process press events.
     if(input->type == InputTypePress) {
+        FURI_LOG_I(TAG, "Enter button pressed");
         furi_message_queue_put(app->queue, input, FuriWaitForever);
     }
 }
