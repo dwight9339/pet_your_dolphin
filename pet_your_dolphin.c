@@ -47,10 +47,41 @@ static bool handle_reset(AppData* app) {
     DateTime now;
     furi_hal_rtc_get_datetime(&now);
 
+    // === Compute effective date for a 5 AM reset ===
+    uint8_t eff_day   = now.day;
+    uint8_t eff_month = now.month;
+    uint16_t eff_year = now.year;
+    if(now.hour < 5) {
+        // Roll back one calendar day
+        if(eff_day > 1) {
+            eff_day--;
+        } else {
+            // Move to last day of previous month
+            if(eff_month > 1) {
+                eff_month--;
+            } else {
+                eff_month  = 12;
+                eff_year--;
+            }
+            // Days in each month (no external deps)
+            static const uint8_t days_in_month[13] = {
+                0,31,28,31,30,31,30,31,31,30,31,30,31
+            };
+            eff_day = days_in_month[eff_month];
+            // Feb leap-year check
+            if(eff_month == 2 &&
+               ((eff_year % 400 == 0) ||
+                (eff_year % 4 == 0 && eff_year % 100 != 0))) {
+                eff_day = 29;
+            }
+        }
+    }
+
+    // === Compare to last reset “effective date” ===
     bool is_new_day =
-        (now.day != app->state.last_pet_day) ||
-        (now.month != app->state.last_pet_month) ||
-        (now.year != app->state.last_pet_year);
+        (eff_day   != app->state.last_pet_day)   ||
+        (eff_month != app->state.last_pet_month) ||
+        (eff_year  != app->state.last_pet_year);
 
     if(is_new_day) {
         app->state.last_pet_day = now.day;
